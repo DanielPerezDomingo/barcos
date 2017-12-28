@@ -16,26 +16,25 @@ if (isset($_POST["Jugador"])) {
     if ($mysqli->connect_error) {
         die("Error al realizar la conexion");
     } else {
-        $sql="select Idpartidas,Tablero from partidas where Jugador=? and finalizada =0;" ;
-        $query=$mysqli->prepare($sql);
-        $query->bind_param("s", $_POST['Jugador']);
-        $query->execute();
-        $result=$query->get_result();
-        $myrow=$result->fetch_assoc();
+        $myrow=partida_actual($mysqli,$_POST['Jugador']);
         if ($myrow) {
             $_SESSION["Idpartidas"]= $myrow["Idpartidas"];
             $_SESSION["Tablero"]=$myrow["Tablero"];
         } else {
+            $_SESSION["Tablero"]=$_POST["Tablero"];
             $sql= "INSERT INTO partidas (Jugador,Tablero) values (?,?);";
             $query=$mysqli->prepare($sql);
-            $query->bind_param("si", $_POST['Jugador'], $_POST['tablero']);
+            $query->bind_param("si", $_POST['Jugador'], $_POST['Tablero']);
             $query->execute();
+        $idpart=partida_actual($mysqli,$_POST['Jugador']);
+        $_SESSION["Idpartidas"]=$idpart["Idpartidas"];
         }
+
     }
 }
 
 if (isset($_SESSION['Jugador'])) {
-    Redirect('test.php', false);
+   Redirect('partida.php', false);
 }
 
 
@@ -50,9 +49,9 @@ if (isset($_SESSION['Jugador'])) {
    <input type="text" name="Jugador">
    <br>
    
-   tablero 10x10<input type="radio" name="tablero" value="10" cheked><br>
-   tablero 15x15<input type="radio" name="tablero" value="15"><br>
-   tablero 20x20<input type="radio" name="tablero" value="20"><br>
+   tablero 10x10<input type="radio" name="Tablero" value="10" cheked><br>
+   tablero 15x15<input type="radio" name="Tablero" value="15"><br>
+   tablero 20x20<input type="radio" name="Tablero" value="20"><br>
    <input type="submit" value="Enviar">
  </form> 
 
