@@ -1,4 +1,5 @@
-<?php 
+<?php
+include "table.php"; 
 ini_set('display_errors', 'On');
 function Redirect($url, $permanent = false)
 {
@@ -16,6 +17,7 @@ if (!isset($_SESSION['Jugador'])) {
 ?>
 <html>
    <head>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
    <title>
     <?php 
         //echo $_SESSION['Jugador']." ".$_SESSION[]... 
@@ -28,9 +30,11 @@ if (!isset($_SESSION['Jugador'])) {
 <?php print_r($_SESSION);?>       
    <form action="" method="POST">
    <input type="hidden" name="logout" value="1">
-   <input type="submit" value="Submit">
+   <input type="submit" value="EXIT">
  </form> 
 <?php 
+tablero($_SESSION["Tablero"]);
+
 
 
 $mysqli=new mysqli("localhost", "root", "-*/987<zx", "barcos");

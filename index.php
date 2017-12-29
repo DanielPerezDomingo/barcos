@@ -16,25 +16,20 @@ if (isset($_POST["Jugador"])) {
     if ($mysqli->connect_error) {
         die("Error al realizar la conexion");
     } else {
-        $myrow=partida_actual($mysqli,$_POST['Jugador']);
+        $myrow=partida_actual($mysqli, $_POST['Jugador']);
         if ($myrow) {
             $_SESSION["Idpartidas"]= $myrow["Idpartidas"];
             $_SESSION["Tablero"]=$myrow["Tablero"];
         } else {
             $_SESSION["Tablero"]=$_POST["Tablero"];
-            $sql= "INSERT INTO partidas (Jugador,Tablero) values (?,?);";
-            $query=$mysqli->prepare($sql);
-            $query->bind_param("si", $_POST['Jugador'], $_POST['Tablero']);
-            $query->execute();
-        $idpart=partida_actual($mysqli,$_POST['Jugador']);
-        $_SESSION["Idpartidas"]=$idpart["Idpartidas"];
+            $idpart=crear_partida($mysqli,$_POST['Jugador'],$_POST['tablero']);
+            $_SESSION["Idpartidas"]=$idpart["Idpartidas"];
         }
-
     }
 }
 
 if (isset($_SESSION['Jugador'])) {
-   Redirect('partida.php', false);
+    Redirect('partida.php', false);
 }
 
 

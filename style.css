@@ -1,0 +1,12 @@
+.tablero{
+border: 1px;
+border-collapse:collapse;
+text-align: center;
+}
+
+.tablero tr{
+    height: 20px
+}
+.tablero td{
+    width: 20px
+}
