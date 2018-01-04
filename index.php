@@ -22,13 +22,13 @@ if (isset($_POST["Jugador"])) {
             $_SESSION["Tablero"]=$myrow["Tablero"];
         } else {
             $_SESSION["Tablero"]=$_POST["Tablero"];
-            $idpart=crear_partida($mysqli,$_POST['Jugador'],$_POST['tablero']);
+            $idpart=crear_partida($mysqli,$_POST['Jugador'],$_POST['Tablero']);
             $_SESSION["Idpartidas"]=$idpart["Idpartidas"];
         }
     }
 }
 
-if (isset($_SESSION['Jugador'])) {
+if (isset($_SESSION['Jugador']) && $_SESSION['Tablero']) {
     Redirect('partida.php', false);
 }
 
@@ -44,9 +44,9 @@ if (isset($_SESSION['Jugador'])) {
    <input type="text" name="Jugador">
    <br>
    
-   tablero 10x10<input type="radio" name="Tablero" value="10" cheked><br>
-   tablero 15x15<input type="radio" name="Tablero" value="15"><br>
-   tablero 20x20<input type="radio" name="Tablero" value="20"><br>
+   Tablero 10x10<input type="radio" name="Tablero" value="10" cheked><br>
+   Tablero 15x15<input type="radio" name="Tablero" value="15"><br>
+   Tablero 20x20<input type="radio" name="Tablero" value="20"><br>
    <input type="submit" value="Enviar">
  </form> 
 

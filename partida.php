@@ -29,14 +29,22 @@ if (!isset($_SESSION['Jugador'])) {
    <body>
 <?php print_r($_SESSION);?>       
    <form action="" method="POST">
-   <input type="hidden" name="logout" value="1">
-   <input type="submit" value="EXIT">
- </form> 
+   barco pequeño<input type="radio" name="barco" value="2"><br>
+   barco mediano<input type="radio" name="barco" value="3"><br>
+   barco grande<input type="radio" name="barco" value="4"><br>
+ Coordenada X <input type="text" name "x"><br>
+ coordenada Y <input type="text" name "Y"><br>
+ <input type="submit" name"enviar"><br>
+ 
 <?php 
 tablero($_SESSION["Tablero"]);
+?>
 
+<input type="hidden" name="logout" value="1">
+<input type="submit" value="EXIT">
 
-
+</form> 
+<?php
 $mysqli=new mysqli("localhost", "root", "-*/987<zx", "barcos");
 if ($mysqli->connect_error) {
     echo "Error al realizar la conexion";
