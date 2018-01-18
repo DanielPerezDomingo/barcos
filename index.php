@@ -28,7 +28,7 @@ if (isset($_POST["Jugador"])) {
     }
 }
 
-if (isset($_SESSION['Jugador']) && $_SESSION['Tablero']) {
+if (isset($_SESSION['Jugador'])) {
     Redirect('partida.php', false);
 }
 
